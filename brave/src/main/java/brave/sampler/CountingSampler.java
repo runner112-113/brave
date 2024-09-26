@@ -49,6 +49,7 @@ public final class CountingSampler extends Sampler {
   CountingSampler(float probability, Random random) {
     counter = new AtomicInteger();
     int outOf100 = (int) (probability * 100.0f);
+    // 按百分比随机撒在BitSet上
     this.sampleDecisions = randomBitSet(100, outOf100, random);
   }
 

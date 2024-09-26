@@ -89,6 +89,12 @@
       <version>${spring5.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>io.zipkin.reporter2</groupId>
+      <artifactId>zipkin-reporter-brave</artifactId>
+      <version>3.4.3-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

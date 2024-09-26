@@ -13,7 +13,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static brave.internal.Throwables.propagateIfFatal;
 
-/** This logs exceptions instead of raising an error, as the supplied collector could have bugs. */
+/**
+ * This logs exceptions instead of raising an error, as the supplied collector could have bugs.
+ * 最外层的SpanHandler，处理异常，可以组合{@link CompositeSpanHandler}
+ * */
 public final class NoopAwareSpanHandler extends SpanHandler {
   // Array ensures no iterators are created at runtime
   public static SpanHandler create(SpanHandler[] handlers,

@@ -122,6 +122,7 @@ public abstract class Tracing implements Closeable {
     Clock clock;
     Sampler sampler = Sampler.ALWAYS_SAMPLE;
     CurrentTraceContext currentTraceContext = CurrentTraceContext.Default.inheritable();
+    // traceId128Bit:是否使用128bit traceId
     boolean traceId128Bit = false, supportsJoin = true;
     boolean alwaysSampleLocal = false, trackOrphans = false;
     Propagation.Factory propagationFactory = B3Propagation.FACTORY;
@@ -389,6 +390,7 @@ public abstract class Tracing implements Closeable {
       SpanHandler spanHandler =
         NoopAwareSpanHandler.create(spanHandlers.toArray(new SpanHandler[0]), noop);
 
+      // 构建全局Tracer
       this.tracer = new Tracer(
         builder.propagationFactory,
         spanHandler,

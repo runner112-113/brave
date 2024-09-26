@@ -8,7 +8,11 @@ import brave.handler.MutableSpan;
 import brave.internal.recorder.PendingSpans;
 import brave.propagation.TraceContext;
 
-/** This wraps the public api and guards access to a mutable span. */
+/**
+ * This wraps the public api and guards access to a mutable span.
+ *
+ * wrapper {@link MutableSpan}
+ * */
 final class RealSpan extends Span {
   final TraceContext context;
   final PendingSpans pendingSpans;

@@ -146,6 +146,7 @@ public class Tracer {
    */
   public final Span joinSpan(TraceContext context) {
     if (context == null) throw new NullPointerException("context == null");
+    // 判断是否支持join，默认为false
     if (!supportsJoin) return newChild(context);
 
     // set shared flag if not already done
@@ -235,6 +236,7 @@ public class Tracer {
       flags |= FLAG_SAMPLED_LOCAL;
     }
 
+    // 填充spanId
     if (spanId == 0L) spanId = nextId();
 
     if (traceId == 0L) { // make a new trace ID
@@ -242,6 +244,7 @@ public class Tracer {
       traceId = spanId;
     }
 
+    // 设置是否sample
     if ((flags & FLAG_SAMPLED_SET) != FLAG_SAMPLED_SET) { // cheap check for not yet sampled
       flags = InternalPropagation.sampled(sampler.isSampled(traceId), flags);
       flags &= ~FLAG_SHARED; // cannot be shared if not yet sampled
@@ -254,6 +257,7 @@ public class Tracer {
     } else {
       flags &= ~FLAG_LOCAL_ROOT;
     }
+    // 处理propagation
     return propagationFactory.decorate(InternalPropagation.instance.newTraceContext(
       flags,
       traceIdHigh,
@@ -329,6 +333,7 @@ public class Tracer {
     } else {
       flags = InternalPropagation.instance.flags(samplingFlags);
     }
+    // spanId为0会新生成一个spanId
     return _toSpan(parent,
       decorateContext(flags, traceIdHigh, traceId, localRootId, spanId, 0L, extra));
   }

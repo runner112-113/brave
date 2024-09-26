@@ -21,7 +21,9 @@ public abstract class InternalPropagation {
    * A flags bitfield is used internally inside {@link TraceContext} as opposed to several booleans.
    * This reduces the size of the object and allows us to set or check a couple states at once.
    */
+  // 是否采样
   public static final int FLAG_SAMPLED = 1 << 1;
+  // 是否设置了FLAG_SAMPLED值
   public static final int FLAG_SAMPLED_SET = 1 << 2;
   public static final int FLAG_DEBUG = 1 << 3;
   public static final int FLAG_SHARED = 1 << 4;

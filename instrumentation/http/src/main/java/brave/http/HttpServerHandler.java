@@ -84,6 +84,7 @@ public final class HttpServerHandler<Req, Resp> extends HttpHandler {
    * @since 5.7
    */
   public Span handleReceive(HttpServerRequest request) {
+    // 提取请求中的B3相关信息,构建parentContext
     Span span = nextSpan(defaultExtractor.extract(request), request);
     return handleStart(request, span);
   }
